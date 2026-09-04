@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 
 def parse_total_seconds(time_str: str) -> int:
@@ -38,18 +39,19 @@ def main():
     # for p in periods:
     #     print(f"{p.start_c} - {p.end_c}")
 
-    now = datetime.now()
+    while True:
+        now = datetime.now()
 
-    seconds_today = (now.hour * 3600) + (now.minute * 60) + now.second
-
-    print(seconds_today)
-
-    for p in periods:
-        if seconds_today >= p.start_c and seconds_today <= p.end_c:
-            print(f"Current period: {p.name}")
-            print(
-                f"Minutes:seconds till the end: {(p.end_c - seconds_today) // 60}:{(p.end_c - seconds_today) % 60:02d}"
-            )
+        seconds_today = (now.hour * 3600) + (now.minute * 60) + now.second
+        for p in periods:
+            if seconds_today >= p.start_c and seconds_today <= p.end_c:
+                print(f"Current period: {p.name}")
+                print(
+                    f"Minutes:seconds till the end: {(p.end_c - seconds_today) // 60}:{(p.end_c - seconds_today) % 60:02d}"
+                )
+                # move terminal cursor UP 2 rows and redraw
+                print("\033[2F", end="")
+        time.sleep(1)
 
 
 if __name__ == "__main__":
