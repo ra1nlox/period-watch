@@ -1,3 +1,4 @@
+import sys
 import time
 from datetime import datetime
 
@@ -41,19 +42,30 @@ def main():
     # for p in periods:
     #     print(f"{p.start_c} - {p.end_c}")
 
-    print(f"Current tickrate: {TICK}")
+    # print(f"Current tickrate: {TICK}")
     while True:
         now = datetime.now()
 
         seconds_today = (now.hour * 3600) + (now.minute * 60) + now.second
         for p in periods:
-            if seconds_today >= p.start_c and seconds_today <= p.end_c:
+            # Se verifică dacă perechile nu s-au ănceput
+            if periods.index(p) == 0 and seconds_today <= p.start_c:
+                print(
+                    f"1st period will start in:  {(p.end_c - seconds_today) // 60}:{(p.end_c - seconds_today) % 60:02d}"
+                )
+            # Se verifică perechea/pauza curentă
+            elif seconds_today >= p.start_c and seconds_today <= p.end_c:
                 print(f"Current period: {p.name}")
                 print(
                     f"Minutes:seconds till the end: {(p.end_c - seconds_today) // 60}:{(p.end_c - seconds_today) % 60:02d}"
                 )
                 # move terminal cursor UP 2 rows and redraw
                 print("\033[2F", end="")
+            # Se verifică dacă perechile/pauzele s-au terminat
+            elif periods.index(p) == len(periods) - 1 and seconds_today > p.end_c:
+                print("IT'S OVEEEEEEEEEEEER")
+                sys.exit(0)
+
         time.sleep(TICK)
 
 
