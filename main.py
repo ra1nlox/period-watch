@@ -1,5 +1,7 @@
-from datetime import datetime
 import time
+from datetime import datetime
+
+TICK = 1
 
 
 def parse_total_seconds(time_str: str) -> int:
@@ -39,6 +41,7 @@ def main():
     # for p in periods:
     #     print(f"{p.start_c} - {p.end_c}")
 
+    print(f"Current tickrate: {TICK}")
     while True:
         now = datetime.now()
 
@@ -51,7 +54,7 @@ def main():
                 )
                 # move terminal cursor UP 2 rows and redraw
                 print("\033[2F", end="")
-        time.sleep(1)
+        time.sleep(TICK)
 
 
 if __name__ == "__main__":
