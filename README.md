@@ -4,7 +4,7 @@ This CLI app tracks which school period is currently on, and when it will end.
 
 # Credit
 
-This program was made during TC course in UTM.
+This program was made during TP course in UTM.
 It also uses typical UTM schedule.
 
 # Requirements
